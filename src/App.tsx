@@ -8,7 +8,14 @@ import NavBar from './components/NavBar'
 export default function App() {
     registerSW({ immediate: true })
     return (
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense
+            fallback={
+                <>
+                    <NavBar></NavBar>
+                    <p>Loading...</p>
+                </>
+            }
+        >
             <NavBar></NavBar>
             <main className="h-1 min-h-screen py-16">{useRoutes(routes)}</main>
         </Suspense>

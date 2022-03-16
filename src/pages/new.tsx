@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react'
-import { getClues, getPlayers } from '../lib/data'
+import { getPlayers } from '../lib/data'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { Link } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 
 const playersCountList = [
     { value: 2, label: '2 joueurs' },
@@ -12,6 +12,8 @@ const playersCountList = [
 ]
 
 function App() {
+    const navigate = useNavigate()
+
     const [difficulty, setDifficulty] = useState('normal')
     const [playersCount, setPlayersCount] = useState(playersCountList[1])
     const players = getPlayers()
@@ -55,6 +57,19 @@ function App() {
             return
         }
         setOpponents([...opponents, player])
+    }
+
+    const handleStartGame = () => {
+        const gameOptions = {
+            difficulty,
+            playerCount: playersCount.value,
+            player: JSON.stringify(myPlayers),
+            opponents: JSON.stringify(opponents),
+        }
+        return navigate({
+            pathname: '/game',
+            search: `?${createSearchParams(gameOptions as any)}`,
+        })
     }
 
     return (
@@ -200,11 +215,12 @@ function App() {
                 </div>
             </div>
             <div className="mt-auto">
-                <Link to="/">
-                    <button className="w-full rounded-md bg-amber-500 p-4 font-bold uppercase text-white active:bg-amber-600">
-                        Démarrer la partie
-                    </button>
-                </Link>
+                <button
+                    className="w-full rounded-md bg-amber-500 p-4 font-bold uppercase text-white active:bg-amber-600"
+                    onClick={handleStartGame}
+                >
+                    Démarrer la partie
+                </button>
             </div>
         </div>
     )
