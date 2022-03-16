@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { ThumbUpIcon, ThumbDownIcon } from '@heroicons/react/solid';
 import Clue from './components/Clue';
+import { registerSW } from 'virtual:pwa-register';
 
 function App() {
+  registerSW({ immediate: true });
   const [count, setCount] = useState(0);
 
   const clues = [
