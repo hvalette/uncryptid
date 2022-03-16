@@ -14,7 +14,6 @@ const playersCountList = [
 function App() {
     const [difficulty, setDifficulty] = useState('normal')
     const [playersCount, setPlayersCount] = useState(playersCountList[1])
-    const clues = getClues()
     const players = getPlayers()
 
     const [myPlayers, setMyPlayers] = useState([players[0]])
