@@ -13,24 +13,26 @@ export default function Clue({ value }: any) {
       >
         {value}
       </div>
-      <div className="flex">
+      <div className="flex gap-1">
         <button
+          className="rounded-full outline-none active:bg-stone-200 p-2"
           onClick={() => (status !== true ? setStatus(true) : setStatus(null))}
         >
           <ThumbUpIcon
-            className={`h-5 w-5 text-stone-500 mx-2 rounded-full outline-none transition-all ${
+            className={`h-6 w-6 text-stone-500 transition-all ${
               status && 'text-green-600'
             }`}
           ></ThumbUpIcon>
         </button>
         <button
+          className="rounded-full outline-none transition-all active:bg-stone-200 p-2"
           onClick={() =>
             status !== false ? setStatus(false) : setStatus(null)
           }
         >
           <ThumbDownIcon
-            className={`h-5 w-5 text-stone-500 mx-2 rounded-full outline-none transition-all ${
-              status === false && 'text-red-600'
+            className={`h-6 w-6 text-stone-500 transition-all ${
+              status === false && 'text-red-600 '
             }`}
           ></ThumbDownIcon>
         </button>

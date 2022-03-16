@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Clue from './components/Clue';
 import { registerSW } from 'virtual:pwa-register';
+import NavBar from './components/NavBar';
 
 function App() {
   registerSW({ immediate: true });
@@ -63,9 +64,8 @@ function App() {
 
   return (
     <>
-      <header className="h-16 w-full fixed top-0 left-0 bg-teal-600 shadow-xl"></header>
-
-      <main className="mt-16">
+      <NavBar></NavBar>
+      <main className="py-16">
         <div className="flex snap-x snap-mandatory overflow-auto flex-none flex-row flex-nowrap">
           {players.map((player) => (
             <section

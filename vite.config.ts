@@ -18,6 +18,7 @@ export default defineConfig({
         name: 'Uncryptid',
         short_name: 'Uncryptid',
         description: 'Cryptid game companion app',
+        theme_color: '#0e7490',
         icons: [
           {
             src: 'pwa-192x192.png',
