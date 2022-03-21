@@ -9,7 +9,7 @@ export default function NavBar() {
                     New
                 </button>
             </Link>
-            <div className="text-bold font-display text-4xl tracking-widest text-white">
+            <div className="font-display text-4xl tracking-widest text-white">
                 Uncryptid
             </div>
             <button className="rounded-full p-2 active:bg-cyan-800">

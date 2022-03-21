@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import './index.css'
+import './styles/global.css'
 import { useRoutes } from 'react-router-dom'
 import routes from '~pages'
 import { registerSW } from 'virtual:pwa-register'
