@@ -1,4 +1,4 @@
-export function getClues() {
+export function getClues(advanced: boolean) {
     return [
         {
             label: 'Est dans un type de terrain',
@@ -41,7 +41,7 @@ export function getClues() {
                 'Structure Bleue',
                 'Structure Blanche',
                 'Structure Verte',
-                'Structure Noire',
+                ...(advanced ? ['Structure Noire'] : []),
             ],
         },
     ]

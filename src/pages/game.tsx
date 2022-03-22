@@ -10,9 +10,7 @@ export default function Game() {
     const player = searchParams.get('player')
     const opponents = JSON.parse(searchParams.get('opponents') ?? '')
 
-    console.log(opponents)
-
-    const clues = getClues()
+    const clues = getClues(advanced === 'true')
 
     const players = opponents
 
