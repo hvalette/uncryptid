@@ -17,7 +17,9 @@ export default function App() {
             }
         >
             <NavBar></NavBar>
-            <main className="h-1 min-h-screen py-16">{useRoutes(routes)}</main>
+            <main className="h-1 min-h-[calc(100vh-4rem)] pt-16">
+                {useRoutes(routes)}
+            </main>
         </Suspense>
     )
 }

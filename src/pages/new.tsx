@@ -1,20 +1,20 @@
 import { Fragment, useState } from 'react'
 import { getPlayers } from '../lib/data'
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, Switch, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { createSearchParams, Link, useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 
 const playersCountList = [
-    { value: 2, label: '2 joueurs' },
+    { value: 2, label: '2 joueurs (Variant)' },
     { value: 3, label: '3 joueurs' },
     { value: 4, label: '4 joueurs' },
     { value: 5, label: '5 joueurs' },
 ]
 
-function App() {
+export default function New() {
     const navigate = useNavigate()
 
-    const [difficulty, setDifficulty] = useState('normal')
+    const [advanced, setAdvanced] = useState(false)
     const [playersCount, setPlayersCount] = useState(playersCountList[1])
     const players = getPlayers()
 
@@ -61,10 +61,12 @@ function App() {
 
     const handleStartGame = () => {
         const gameOptions = {
-            difficulty,
+            advanced,
             playerCount: playersCount.value,
             player: JSON.stringify(myPlayers),
-            opponents: JSON.stringify(opponents),
+            opponents: JSON.stringify(
+                opponents.sort((a, b) => a.symbol.localeCompare(b.symbol))
+            ),
         }
         return navigate({
             pathname: '/game',
@@ -74,34 +76,34 @@ function App() {
 
     return (
         <div className="flex h-full flex-col gap-8 p-8 md:px-16">
-            <div className="flex gap-4 ">
-                <button
-                    className={`relative basis-full rounded bg-stone-200 px-4 py-2 font-semibold uppercase shadow transition-all after:absolute after:-bottom-2 after:h-1 after:rounded after:bg-cyan-700 after:transition-all ${
-                        difficulty === 'normal'
-                            ? 'after:left-0 after:w-full'
-                            : 'after:left-1/2 after:w-0'
-                    }`}
-                    onClick={() => setDifficulty('normal')}
-                >
-                    Normal
-                </button>
-                <button
-                    className={`relative basis-full rounded bg-stone-900 px-4 py-2 font-semibold uppercase text-white shadow transition-all after:absolute after:-bottom-2 after:h-1 after:rounded after:bg-cyan-700 after:transition-all ${
-                        difficulty === 'advanced'
-                            ? 'after:left-0 after:w-full'
-                            : 'after:left-1/2 after:w-0'
-                    }`}
-                    onClick={() => setDifficulty('advanced')}
-                >
-                    Avancé
-                </button>
-            </div>
+            <div className="text-xl font-bold">Configuration de la partie</div>
+            <Switch.Group>
+                <div className="flex w-full items-center justify-between">
+                    <Switch.Label className="mr-4 font-semibold">
+                        Avancé
+                    </Switch.Label>
+                    <Switch
+                        checked={advanced}
+                        onChange={setAdvanced}
+                        className={`${
+                            advanced ? 'bg-amber-400' : 'bg-stone-200'
+                        }
+                            relative inline-flex h-[34px] w-[74px] flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+                    >
+                        <span
+                            className={`${
+                                advanced ? 'translate-x-10' : 'translate-x-0'
+                            } pointer-events-none inline-block h-[30px] w-[30px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                        />
+                    </Switch>
+                </div>
+            </Switch.Group>
             <div>
                 <div className="font-semibold">Nombre de joueurs : </div>
                 <div className="grid w-full place-items-center">
                     <Listbox value={playersCount} onChange={setPlayersCount}>
-                        <div className="relative mt-1 w-1/2">
-                            <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                        <div className="relative mt-1 w-full">
+                            <Listbox.Button className="relative w-full cursor-default rounded-lg border-2 border-stone-200 bg-white py-2 pl-3 pr-10 text-left focus:outline-none sm:text-sm">
                                 <span className="block truncate">
                                     {playersCount.label}
                                 </span>
@@ -118,7 +120,7 @@ function App() {
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
-                                <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md  bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                     {playersCountList.map((pc, index) => (
                                         <Listbox.Option
                                             key={index}
@@ -136,7 +138,7 @@ function App() {
                                                     <span
                                                         className={`block truncate ${
                                                             selected
-                                                                ? 'font-medium'
+                                                                ? 'font-semibold'
                                                                 : 'font-normal'
                                                         }`}
                                                     >
@@ -225,5 +227,3 @@ function App() {
         </div>
     )
 }
-
-export default App

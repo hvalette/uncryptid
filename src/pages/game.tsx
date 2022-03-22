@@ -5,7 +5,7 @@ import { getClues, getPlayers } from '../lib/data'
 export default function Game() {
     const [searchParams] = useSearchParams()
 
-    const difficulty = searchParams.get('difficulty')
+    const advanced = searchParams.get('advanced')
     const playerCount = searchParams.get('playerCount')
     const player = searchParams.get('player')
     const opponents = JSON.parse(searchParams.get('opponents') ?? '')
@@ -34,7 +34,9 @@ export default function Game() {
                         <div className=" ">
                             {clues.map((clue) => (
                                 <div key={clue.label}>
-                                    <div className="mb-2 border-y border-stone-300 bg-stone-100 py-2 text-center font-display text-3xl font-bold ">
+                                    <div
+                                        className={`mb-2 border-y border-stone-300  py-2 text-center font-display text-3xl font-bold ${player.classes} bg-opacity-10`}
+                                    >
                                         {clue.label}
                                     </div>
                                     {clue.values.map((value) => (
