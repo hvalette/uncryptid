@@ -5,7 +5,7 @@ export default function NavBar() {
     return (
         <header className="fixed top-0 left-0 z-50 flex h-16 w-full items-center justify-between bg-gradient-to-b from-cyan-700 to-cyan-600 p-4 shadow-xl">
             <Link to="/new">
-                <button className="rounded bg-amber-500 py-2 px-4 font-bold uppercase text-white shadow active:bg-amber-600">
+                <button className="rounded-full bg-amber-500 py-2 px-4 font-bold uppercase text-white shadow active:bg-amber-600">
                     New
                 </button>
             </Link>
