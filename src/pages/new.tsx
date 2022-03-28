@@ -218,7 +218,7 @@ export default function New() {
             </div>
             <div className="mt-auto">
                 <button
-                    className="w-full rounded-full  bg-amber-500 p-4 font-bold uppercase text-white shadow active:bg-amber-600"
+                    className="w-full rounded-full bg-amber-500 p-4 font-bold uppercase text-white shadow active:bg-amber-600"
                     onClick={handleStartGame}
                 >
                     Démarrer la partie
